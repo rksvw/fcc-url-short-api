@@ -17,7 +17,7 @@
       ></span
     >
 
-    <form onsubmit="{handleSubmit(event)}">
+    <form>
       <fieldset>
         <legend>URL Shortener</legend>
         <div>
@@ -57,11 +57,15 @@
             body: JSON.stringify({ url }),
           });
 
-          const data = await res.json();
-          console.log(data);
+          if (!res.ok) {
+            document.getElementById("redirect").innerText = "Error!";
+          }
 
-          document.getElementById("redirect").textContent =
-            data.original_url || "Error!";
+          const data = await res.json();
+
+          document.getElementById("redirect").innerText = data.original_url;
+
+          window.location.href = `/api/shorturl`;
         });
       });
     </script>
