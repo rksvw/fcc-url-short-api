@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>url-shortener-microservice</title>
+    <link rel="stylesheet" href="sytle.css" type="text/css" />
+  </head>
+  <body>
+    <h1>URL Shortener Microservice</h1>
+    <br />
+    <h2>Shor URL Creation</h2>
+    <br />
+    <span
+      >Example:<code>
+        PORT [project_url]/api/shorturl - https://www.google.com</code
+      ></span
+    >
+
+    <form onsubmit="{handleSubmit(event)}">
+      <fieldset>
+        <legend>URL Shortener</legend>
+        <div>
+          <label for="url">URL:</label>
+          <input
+            type="text"
+            name="url"
+            id="url"
+            placeholder="https://www.freecodecamp.org/"
+          />
+          <button type="submit">POST URL</button>
+        </div>
+      </fieldset>
+    </form>
+
+    <h2>Example Usage:</h2>
+    <a href="http://localhost:4000/api/shorturl/3"
+      >[this_project_url]/api/shorturl/3</a
+    >
+    <h3>Will Redirect to:</h3>
+    <p id="redirect"></p>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const form = document.querySelector("form");
+        const input = document.querySelector("#url");
+
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const url = input.value;
+
+          const res = await fetch("http://localhost:4000/api/shorturl", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ url }),
+          });
+
+          const data = await res.json();
+          console.log(data);
+
+          document.getElementById("redirect").textContent =
+            data.original_url || "Error!";
+        });
+      });
+    </script>
+  </body>
+</html>
