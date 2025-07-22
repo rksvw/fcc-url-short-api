@@ -1,11 +1,7 @@
 function isValidUrl(url) {
   try {
-    const pattern = /https?\:\/\/www\.[a-zA-Z0-9]{1,}\.[a-zA-Z]{2,3}/;
-    console.log(pattern.test(url));
-    if (new URL(url) && pattern.test(url)) {
-      return true;
-    }
-    return false;
+    const nurl = new URL(url);
+    return nurl.protocol === "http:" || nurl.protocol === "https:";
   } catch (err) {
     return false;
   }
@@ -13,7 +9,7 @@ function isValidUrl(url) {
 
 const uniqueSet = new Set();
 
-const short_url_db = { 1: "https://freeCodeCamp.org" };
+const short_url_db = {};
 
 function randomNumber() {
   let num;
