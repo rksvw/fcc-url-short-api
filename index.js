@@ -1,9 +1,9 @@
-const express = require("express");
+const { express, app } = require("./app");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const app = express();
 const getRoute = require("./routes/get-route");
 const postRoute = require("./routes/post-route");
+const dns = require("dns");
 const PORT = 4000;
 
 // Middleware for static files and folders

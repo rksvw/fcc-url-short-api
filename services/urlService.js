@@ -1,7 +1,11 @@
 function isValidUrl(url) {
   try {
-    new URL(url);
-    return true;
+    const pattern = /https?\:\/\/www\.[a-zA-Z0-9]{1,}\.[a-zA-Z]{2,3}/;
+    console.log(pattern.test(url));
+    if (new URL(url) && pattern.test(url)) {
+      return true;
+    }
+    return false;
   } catch (err) {
     return false;
   }
@@ -9,7 +13,7 @@ function isValidUrl(url) {
 
 const uniqueSet = new Set();
 
-const short_url_db = {};
+const short_url_db = { 1: "https://freeCodeCamp.org" };
 
 function randomNumber() {
   let num;

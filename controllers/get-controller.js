@@ -1,15 +1,16 @@
 const { short_url_db } = require("../services/urlService");
-const express = require("express");
-const app = express();
+const { app } = require("../app");
 
 async function shortUrl(req, res) {
   const id = app.locals.urlShort;
 
-  console.log(app.locals);
+  console.log(app.locals.urlShort);
 
   if (id === -1) {
     return res.status(404).send({ error: "invalid url" });
   }
+
+  console.log(short_url_db);
 
   res.send({
     original_url: short_url_db[id],
@@ -24,7 +25,7 @@ async function shortUrlId(req, res) {
     return res.json({ error: "No short URL found for the given input" });
   }
 
-  res.render(short_url_db[id]);
+  res.redirect(short_url_db[id]);
 }
 
 module.exports = {

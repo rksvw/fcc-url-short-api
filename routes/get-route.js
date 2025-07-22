@@ -1,4 +1,4 @@
-const express = require("express");
+const {express} = require("../app");
 const { shortUrlId, shortUrl } = require("../controllers/get-controller");
 const route = express.Router();
 
